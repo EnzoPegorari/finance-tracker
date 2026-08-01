@@ -8,7 +8,7 @@ import Topbar from '~/components/layout/Topbar.vue'
     <Sidebar />
     <div class="flex flex-1 flex-col">
       <Topbar />
-      <main class="flex-1 bg-muted/20 p-6">
+      <main class="flex-1 p-6">
         <slot />
       </main>
     </div>

@@ -15,13 +15,21 @@ const chartData = computed(() => ({
     {
       data: props.data.map(d => d.total),
       backgroundColor: props.data.map(d => d.color),
+      borderColor: 'oklch(0.14 0.02 240)',
+      borderWidth: 2,
+      hoverOffset: 8,
     },
   ],
 }))
 
 const chartOptions = {
   responsive: true,
-  plugins: { legend: { position: 'bottom' as const } },
+  plugins: {
+    legend: {
+      position: 'bottom' as const,
+      labels: { color: '#94a3b8', usePointStyle: true, pointStyle: 'circle' as const },
+    },
+  },
 }
 </script>
 

@@ -32,7 +32,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <Card class="w-full max-w-sm">
+  <Card class="glow-border w-full max-w-sm transition-shadow duration-300 hover:shadow-[0_0_0_1px_theme(colors.cyan.400/20%),0_0_50px_-10px_theme(colors.cyan.400/45%)]">
     <CardHeader>
       <CardTitle class="text-2xl">
         Criar conta

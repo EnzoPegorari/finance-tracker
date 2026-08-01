@@ -44,12 +44,22 @@ function formatDate(value: string) {
         <TableCell>{{ transaction.description }}</TableCell>
         <TableCell>
           <span class="inline-flex items-center gap-1.5">
-            <span class="size-2 rounded-full" :style="{ backgroundColor: transaction.categoryColor }" />
+            <span
+              class="size-2 rounded-full"
+              :style="{ backgroundColor: transaction.categoryColor, boxShadow: `0 0 8px -1px ${transaction.categoryColor}` }"
+            />
             {{ transaction.categoryName }}
           </span>
         </TableCell>
-        <TableCell>{{ transaction.type === 'income' ? 'Receita' : 'Despesa' }}</TableCell>
-        <TableCell class="text-right font-medium" :class="transaction.type === 'income' ? 'text-emerald-600' : 'text-destructive'">
+        <TableCell>
+          <span
+            class="rounded-full px-2 py-0.5 text-xs font-medium"
+            :class="transaction.type === 'income' ? 'bg-emerald-400/10 text-emerald-400' : 'bg-destructive/10 text-destructive'"
+          >
+            {{ transaction.type === 'income' ? 'Receita' : 'Despesa' }}
+          </span>
+        </TableCell>
+        <TableCell class="text-right font-medium" :class="transaction.type === 'income' ? 'text-emerald-400' : 'text-destructive'">
           {{ transaction.type === 'income' ? '+' : '-' }}{{ formatCurrency(transaction.amount) }}
         </TableCell>
         <TableCell class="flex justify-end gap-1">

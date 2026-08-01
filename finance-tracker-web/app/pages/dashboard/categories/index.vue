@@ -78,9 +78,12 @@ onMounted(loadCategories)
       <Card v-for="category in categories" :key="category.id">
         <CardContent class="flex items-center justify-between gap-3 py-4">
           <div class="flex items-center gap-2">
-            <span class="size-3 rounded-full" :style="{ backgroundColor: category.color }" />
+            <span
+              class="size-3 rounded-full"
+              :style="{ backgroundColor: category.color, boxShadow: `0 0 10px -1px ${category.color}` }"
+            />
             <span class="font-medium">{{ category.name }}</span>
-            <span v-if="category.isGlobal" class="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">Padrão</span>
+            <span v-if="category.isGlobal" class="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2 py-0.5 text-xs text-cyan-300">Padrão</span>
           </div>
           <div v-if="!category.isGlobal" class="flex gap-1">
             <Button variant="ghost" size="sm" @click="openEditForm(category)">
