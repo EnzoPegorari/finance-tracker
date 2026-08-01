@@ -32,7 +32,7 @@ async function onLogout() {
       </div>
       <Button variant="outline" size="sm" @click="onLogout">
         <LogOut class="size-3.5" />
-        Sair
+        Sign out
       </Button>
     </div>
   </header>

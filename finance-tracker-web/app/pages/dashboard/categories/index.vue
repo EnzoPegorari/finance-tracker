@@ -53,7 +53,7 @@ async function onSubmit() {
 }
 
 async function onDelete(category: CategoryDto) {
-  if (!confirm(`Excluir a categoria "${category.name}"?`))
+  if (!confirm(`Delete the category "${category.name}"?`))
     return
 
   await remove(category.id)
@@ -67,10 +67,10 @@ onMounted(loadCategories)
   <div class="flex flex-col gap-6">
     <div class="flex items-center justify-between">
       <h1 class="text-2xl font-semibold">
-        Categorias
+        Categories
       </h1>
       <Button @click="openCreateForm">
-        Nova categoria
+        New category
       </Button>
     </div>
 
@@ -83,14 +83,14 @@ onMounted(loadCategories)
               :style="{ backgroundColor: category.color, boxShadow: `0 0 10px -1px ${category.color}` }"
             />
             <span class="font-medium">{{ category.name }}</span>
-            <span v-if="category.isGlobal" class="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2 py-0.5 text-xs text-cyan-300">Padrão</span>
+            <span v-if="category.isGlobal" class="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2 py-0.5 text-xs text-cyan-300">Default</span>
           </div>
           <div v-if="!category.isGlobal" class="flex gap-1">
             <Button variant="ghost" size="sm" @click="openEditForm(category)">
-              Editar
+              Edit
             </Button>
             <Button variant="ghost" size="sm" class="text-destructive" @click="onDelete(category)">
-              Excluir
+              Delete
             </Button>
           </div>
         </CardContent>
@@ -100,26 +100,26 @@ onMounted(loadCategories)
     <Dialog :open="isFormOpen" @update:open="isFormOpen = $event">
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{{ editingCategory ? 'Editar categoria' : 'Nova categoria' }}</DialogTitle>
+          <DialogTitle>{{ editingCategory ? 'Edit category' : 'New category' }}</DialogTitle>
         </DialogHeader>
         <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
           <div class="flex flex-col gap-1.5">
-            <Label for="name">Nome</Label>
+            <Label for="name">Name</Label>
             <Input id="name" v-model="name" required />
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div class="flex flex-col gap-1.5">
-              <Label for="color">Cor</Label>
+              <Label for="color">Color</Label>
               <Input id="color" v-model="color" type="color" class="h-9 p-1" />
             </div>
             <div class="flex flex-col gap-1.5">
-              <Label for="icon">Ícone (lucide)</Label>
+              <Label for="icon">Icon (lucide)</Label>
               <Input id="icon" v-model="icon" placeholder="tag" />
             </div>
           </div>
           <DialogFooter>
             <Button type="submit">
-              {{ editingCategory ? 'Salvar' : 'Criar' }}
+              {{ editingCategory ? 'Save' : 'Create' }}
             </Button>
           </DialogFooter>
         </form>

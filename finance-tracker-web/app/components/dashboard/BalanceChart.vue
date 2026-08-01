@@ -18,7 +18,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip,
 
 const props = defineProps<{ data: BalanceHistoryPoint[] }>()
 
-const MONTH_LABELS = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 function areaGradient(context: { chart: { ctx: CanvasRenderingContext2D, chartArea?: { top: number, bottom: number } } }) {
   const { ctx, chartArea } = context.chart
@@ -35,7 +35,7 @@ const chartData = computed(() => ({
   labels: props.data.map(d => `${MONTH_LABELS[d.month - 1]}/${String(d.year).slice(2)}`),
   datasets: [
     {
-      label: 'Saldo',
+      label: 'Balance',
       data: props.data.map(d => d.balance),
       borderColor: '#22d3ee',
       backgroundColor: areaGradient,
@@ -81,7 +81,7 @@ const chartOptions = {
 <template>
   <Card>
     <CardHeader>
-      <CardTitle>Evolução do saldo</CardTitle>
+      <CardTitle>Balance evolution</CardTitle>
     </CardHeader>
     <CardContent>
       <Line :data="chartData" :options="chartOptions" />

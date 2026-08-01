@@ -36,11 +36,11 @@ const chartOptions = {
 <template>
   <Card>
     <CardHeader>
-      <CardTitle>Gastos por categoria</CardTitle>
+      <CardTitle>Spending by category</CardTitle>
     </CardHeader>
     <CardContent>
       <p v-if="data.length === 0" class="py-8 text-center text-sm text-muted-foreground">
-        Nenhuma despesa neste mês ainda.
+        No expenses this month yet.
       </p>
       <Pie v-else :data="chartData" :options="chartOptions" />
     </CardContent>

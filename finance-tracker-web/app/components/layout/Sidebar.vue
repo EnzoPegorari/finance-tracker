@@ -3,8 +3,8 @@ import { ArrowLeftRight, LayoutDashboard, Tags, Zap } from '@lucide/vue'
 
 const links = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { to: '/dashboard/transactions', label: 'Transações', icon: ArrowLeftRight },
-  { to: '/dashboard/categories', label: 'Categorias', icon: Tags },
+  { to: '/dashboard/transactions', label: 'Transactions', icon: ArrowLeftRight },
+  { to: '/dashboard/categories', label: 'Categories', icon: Tags },
 ]
 
 const route = useRoute()

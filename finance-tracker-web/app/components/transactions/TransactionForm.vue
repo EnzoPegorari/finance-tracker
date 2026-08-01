@@ -61,45 +61,45 @@ function onSubmit() {
   <Dialog :open="open" @update:open="onOpenChange">
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>{{ editingTransaction ? 'Editar transação' : 'Nova transação' }}</DialogTitle>
+        <DialogTitle>{{ editingTransaction ? 'Edit transaction' : 'New transaction' }}</DialogTitle>
       </DialogHeader>
       <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
         <div class="flex flex-col gap-1.5">
-          <Label for="description">Descrição</Label>
+          <Label for="description">Description</Label>
           <Input id="description" v-model="description" required />
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div class="flex flex-col gap-1.5">
-            <Label for="amount">Valor</Label>
+            <Label for="amount">Amount</Label>
             <Input id="amount" v-model.number="amount" type="number" min="0.01" step="0.01" required />
           </div>
           <div class="flex flex-col gap-1.5">
-            <Label for="date">Data</Label>
+            <Label for="date">Date</Label>
             <Input id="date" v-model="date" type="date" required />
           </div>
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div class="flex flex-col gap-1.5">
-            <Label>Tipo</Label>
+            <Label>Type</Label>
             <Select v-model="type">
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="expense">
-                  Despesa
+                  Expense
                 </SelectItem>
                 <SelectItem value="income">
-                  Receita
+                  Income
                 </SelectItem>
               </SelectContent>
             </Select>
           </div>
           <div class="flex flex-col gap-1.5">
-            <Label>Categoria</Label>
+            <Label>Category</Label>
             <Select v-model="categoryId">
               <SelectTrigger>
-                <SelectValue placeholder="Selecione" />
+                <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem v-for="category in categories" :key="category.id" :value="category.id">
@@ -110,12 +110,12 @@ function onSubmit() {
           </div>
         </div>
         <div class="flex flex-col gap-1.5">
-          <Label for="notes">Notas (opcional)</Label>
+          <Label for="notes">Notes (optional)</Label>
           <Input id="notes" v-model="notes" />
         </div>
         <DialogFooter>
           <Button type="submit">
-            {{ editingTransaction ? 'Salvar' : 'Criar' }}
+            {{ editingTransaction ? 'Save' : 'Create' }}
           </Button>
         </DialogFooter>
       </form>

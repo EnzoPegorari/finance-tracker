@@ -23,7 +23,7 @@ async function onSubmit() {
     await router.push('/dashboard')
   }
   catch (error: any) {
-    errorMessage.value = error?.data?.statusMessage || error?.data?.error || 'Não foi possível criar a conta.'
+    errorMessage.value = error?.data?.statusMessage || error?.data?.error || 'Unable to create your account.'
   }
   finally {
     isSubmitting.value = false
@@ -35,35 +35,35 @@ async function onSubmit() {
   <Card class="glow-border w-full max-w-sm transition-shadow duration-300 hover:shadow-[0_0_0_1px_theme(colors.cyan.400/20%),0_0_50px_-10px_theme(colors.cyan.400/45%)]">
     <CardHeader>
       <CardTitle class="text-2xl">
-        Criar conta
+        Create account
       </CardTitle>
-      <CardDescription>Comece a organizar suas finanças</CardDescription>
+      <CardDescription>Start organizing your finances</CardDescription>
     </CardHeader>
     <CardContent>
       <form class="flex flex-col gap-4" @submit.prevent="onSubmit">
         <div class="flex flex-col gap-1.5">
-          <Label for="name">Nome</Label>
+          <Label for="name">Name</Label>
           <Input id="name" v-model="name" type="text" required autocomplete="name" />
         </div>
         <div class="flex flex-col gap-1.5">
-          <Label for="email">E-mail</Label>
-          <Input id="email" v-model="email" type="email" placeholder="voce@exemplo.com" required autocomplete="email" />
+          <Label for="email">Email</Label>
+          <Input id="email" v-model="email" type="email" placeholder="you@example.com" required autocomplete="email" />
         </div>
         <div class="flex flex-col gap-1.5">
-          <Label for="password">Senha</Label>
+          <Label for="password">Password</Label>
           <Input id="password" v-model="password" type="password" minlength="8" required autocomplete="new-password" />
         </div>
         <p v-if="errorMessage" class="text-sm text-destructive">
           {{ errorMessage }}
         </p>
         <Button type="submit" class="w-full" :disabled="isSubmitting">
-          {{ isSubmitting ? 'Criando conta...' : 'Criar conta' }}
+          {{ isSubmitting ? 'Creating account...' : 'Create account' }}
         </Button>
       </form>
       <p class="mt-4 text-center text-sm text-muted-foreground">
-        Já tem uma conta?
+        Already have an account?
         <NuxtLink to="/login" class="text-primary underline-offset-4 hover:underline">
-          Entrar
+          Sign in
         </NuxtLink>
       </p>
     </CardContent>

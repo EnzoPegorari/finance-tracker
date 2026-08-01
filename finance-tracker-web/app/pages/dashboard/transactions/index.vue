@@ -81,7 +81,7 @@ async function onSubmit(payload: CreateTransactionPayload) {
 }
 
 async function onDelete(transaction: TransactionDto) {
-  if (!confirm(`Excluir a transação "${transaction.description}"?`))
+  if (!confirm(`Delete the transaction "${transaction.description}"?`))
     return
 
   await remove(transaction.id)
@@ -97,14 +97,14 @@ onMounted(async () => {
   <div class="flex flex-col gap-6">
     <div class="flex items-center justify-between">
       <h1 class="text-2xl font-semibold">
-        Transações
+        Transactions
       </h1>
       <div class="flex gap-2">
         <Button variant="outline" @click="exportCsv(from || undefined, to || undefined)">
-          Exportar CSV
+          Export CSV
         </Button>
         <Button @click="openCreateForm">
-          Nova transação
+          New transaction
         </Button>
       </div>
     </div>
@@ -124,11 +124,11 @@ onMounted(async () => {
 
     <div v-if="totalPages > 1" class="flex items-center justify-center gap-3">
       <Button variant="outline" size="sm" :disabled="page <= 1" @click="page--">
-        Anterior
+        Previous
       </Button>
-      <span class="text-sm text-muted-foreground">Página {{ page }} de {{ totalPages }}</span>
+      <span class="text-sm text-muted-foreground">Page {{ page }} of {{ totalPages }}</span>
       <Button variant="outline" size="sm" :disabled="page >= totalPages" @click="page++">
-        Próxima
+        Next
       </Button>
     </div>
 

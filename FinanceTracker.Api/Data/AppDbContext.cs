@@ -61,18 +61,20 @@ public class AppDbContext : DbContext
         SeedDefaultCategories(modelBuilder);
     }
 
+    private static readonly DateTime SeedCreatedAt = new(2026, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
     private static void SeedDefaultCategories(ModelBuilder modelBuilder)
     {
         var defaultCategories = new[]
         {
-            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111101"), UserId = null, Name = "Alimentação", Color = "#FF5733", Icon = "utensils", CreatedAt = DateTime.UtcNow },
-            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111102"), UserId = null, Name = "Transporte", Color = "#33A1FF", Icon = "car", CreatedAt = DateTime.UtcNow },
-            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111103"), UserId = null, Name = "Saúde", Color = "#33FF57", Icon = "heart-pulse", CreatedAt = DateTime.UtcNow },
-            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111104"), UserId = null, Name = "Moradia", Color = "#A133FF", Icon = "home", CreatedAt = DateTime.UtcNow },
-            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111105"), UserId = null, Name = "Educação", Color = "#FFC300", Icon = "book", CreatedAt = DateTime.UtcNow },
-            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111106"), UserId = null, Name = "Lazer", Color = "#FF33A1", Icon = "gamepad", CreatedAt = DateTime.UtcNow },
-            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111107"), UserId = null, Name = "Salário", Color = "#33FFC1", Icon = "wallet", CreatedAt = DateTime.UtcNow },
-            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111108"), UserId = null, Name = "Outros", Color = "#808080", Icon = "shopping-cart", CreatedAt = DateTime.UtcNow },
+            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111101"), UserId = null, Name = "Food", Color = "#FF5733", Icon = "utensils", CreatedAt = SeedCreatedAt },
+            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111102"), UserId = null, Name = "Transport", Color = "#33A1FF", Icon = "car", CreatedAt = SeedCreatedAt },
+            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111103"), UserId = null, Name = "Health", Color = "#33FF57", Icon = "heart-pulse", CreatedAt = SeedCreatedAt },
+            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111104"), UserId = null, Name = "Housing", Color = "#A133FF", Icon = "home", CreatedAt = SeedCreatedAt },
+            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111105"), UserId = null, Name = "Education", Color = "#FFC300", Icon = "book", CreatedAt = SeedCreatedAt },
+            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111106"), UserId = null, Name = "Leisure", Color = "#FF33A1", Icon = "gamepad", CreatedAt = SeedCreatedAt },
+            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111107"), UserId = null, Name = "Salary", Color = "#33FFC1", Icon = "wallet", CreatedAt = SeedCreatedAt },
+            new Category { Id = Guid.Parse("11111111-1111-1111-1111-111111111108"), UserId = null, Name = "Other", Color = "#808080", Icon = "shopping-cart", CreatedAt = SeedCreatedAt },
         };
 
         modelBuilder.Entity<Category>().HasData(defaultCategories);

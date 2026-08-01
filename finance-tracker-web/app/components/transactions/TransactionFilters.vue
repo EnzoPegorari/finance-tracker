@@ -31,22 +31,22 @@ const type = useVModel(props, 'type', emit)
 <template>
   <div class="flex flex-wrap items-end gap-3 rounded-lg border bg-background p-4">
     <div class="flex flex-col gap-1.5">
-      <Label for="filter-from">De</Label>
+      <Label for="filter-from">From</Label>
       <Input id="filter-from" v-model="from" type="date" class="w-40" />
     </div>
     <div class="flex flex-col gap-1.5">
-      <Label for="filter-to">Até</Label>
+      <Label for="filter-to">To</Label>
       <Input id="filter-to" v-model="to" type="date" class="w-40" />
     </div>
     <div class="flex flex-col gap-1.5">
-      <Label>Categoria</Label>
+      <Label>Category</Label>
       <Select v-model="categoryId">
         <SelectTrigger class="w-44">
-          <SelectValue placeholder="Todas" />
+          <SelectValue placeholder="All" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">
-            Todas
+            All
           </SelectItem>
           <SelectItem v-for="category in categories" :key="category.id" :value="category.id">
             {{ category.name }}
@@ -55,26 +55,26 @@ const type = useVModel(props, 'type', emit)
       </Select>
     </div>
     <div class="flex flex-col gap-1.5">
-      <Label>Tipo</Label>
+      <Label>Type</Label>
       <Select v-model="type">
         <SelectTrigger class="w-36">
-          <SelectValue placeholder="Todos" />
+          <SelectValue placeholder="All" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="all">
-            Todos
+            All
           </SelectItem>
           <SelectItem value="income">
-            Receita
+            Income
           </SelectItem>
           <SelectItem value="expense">
-            Despesa
+            Expense
           </SelectItem>
         </SelectContent>
       </Select>
     </div>
     <Button variant="outline" @click="emit('clear')">
-      Limpar filtros
+      Clear filters
     </Button>
   </div>
 </template>

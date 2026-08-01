@@ -11,11 +11,11 @@ const emit = defineEmits<{
 }>()
 
 function formatCurrency(value: number) {
-  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+  return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 }
 
 function formatDate(value: string) {
-  return new Date(`${value}T00:00:00`).toLocaleDateString('pt-BR')
+  return new Date(`${value}T00:00:00`).toLocaleDateString('en-US')
 }
 </script>
 
@@ -23,12 +23,12 @@ function formatDate(value: string) {
   <Table>
     <TableHeader>
       <TableRow>
-        <TableHead>Data</TableHead>
-        <TableHead>Descrição</TableHead>
-        <TableHead>Categoria</TableHead>
-        <TableHead>Tipo</TableHead>
+        <TableHead>Date</TableHead>
+        <TableHead>Description</TableHead>
+        <TableHead>Category</TableHead>
+        <TableHead>Type</TableHead>
         <TableHead class="text-right">
-          Valor
+          Amount
         </TableHead>
         <TableHead class="w-24" />
       </TableRow>
@@ -36,7 +36,7 @@ function formatDate(value: string) {
     <TableBody>
       <TableRow v-if="transactions.length === 0">
         <TableCell colspan="6" class="text-center text-muted-foreground">
-          Nenhuma transação encontrada.
+          No transactions found.
         </TableCell>
       </TableRow>
       <TableRow v-for="transaction in transactions" :key="transaction.id">
@@ -56,7 +56,7 @@ function formatDate(value: string) {
             class="rounded-full px-2 py-0.5 text-xs font-medium"
             :class="transaction.type === 'income' ? 'bg-emerald-400/10 text-emerald-400' : 'bg-destructive/10 text-destructive'"
           >
-            {{ transaction.type === 'income' ? 'Receita' : 'Despesa' }}
+            {{ transaction.type === 'income' ? 'Income' : 'Expense' }}
           </span>
         </TableCell>
         <TableCell class="text-right font-medium" :class="transaction.type === 'income' ? 'text-emerald-400' : 'text-destructive'">
@@ -64,10 +64,10 @@ function formatDate(value: string) {
         </TableCell>
         <TableCell class="flex justify-end gap-1">
           <Button variant="ghost" size="sm" @click="emit('edit', transaction)">
-            Editar
+            Edit
           </Button>
           <Button variant="ghost" size="sm" class="text-destructive" @click="emit('delete', transaction)">
-            Excluir
+            Delete
           </Button>
         </TableCell>
       </TableRow>

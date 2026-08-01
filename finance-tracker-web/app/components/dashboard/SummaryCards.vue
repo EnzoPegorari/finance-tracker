@@ -6,7 +6,7 @@ import type { DashboardSummary } from '~/types/finance'
 defineProps<{ summary: DashboardSummary | null }>()
 
 function formatCurrency(value: number) {
-  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+  return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 }
 </script>
 
@@ -15,7 +15,7 @@ function formatCurrency(value: number) {
     <Card>
       <CardHeader class="flex items-center justify-between pb-2">
         <CardTitle class="text-sm font-medium text-muted-foreground">
-          Saldo atual
+          Current balance
         </CardTitle>
         <Wallet class="size-4 text-cyan-400" />
       </CardHeader>
@@ -31,7 +31,7 @@ function formatCurrency(value: number) {
     <Card>
       <CardHeader class="flex items-center justify-between pb-2">
         <CardTitle class="text-sm font-medium text-muted-foreground">
-          Receitas do mês
+          Income this month
         </CardTitle>
         <TrendingUp class="size-4 text-emerald-400" />
       </CardHeader>
@@ -44,7 +44,7 @@ function formatCurrency(value: number) {
     <Card>
       <CardHeader class="flex items-center justify-between pb-2">
         <CardTitle class="text-sm font-medium text-muted-foreground">
-          Despesas do mês
+          Expenses this month
         </CardTitle>
         <TrendingDown class="size-4 text-destructive" />
       </CardHeader>
