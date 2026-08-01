@@ -2,6 +2,7 @@
 import {
   CategoryScale,
   Chart as ChartJS,
+  Filler,
   Legend,
   LinearScale,
   LineElement,
@@ -13,7 +14,7 @@ import { Line } from 'vue-chartjs'
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
 import type { BalanceHistoryPoint } from '~/types/finance'
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend)
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, Filler)
 
 const props = defineProps<{ data: BalanceHistoryPoint[] }>()
 
