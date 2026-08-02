@@ -119,5 +119,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGet("/", () => Results.Ok(new { status = "healthy" }));
 
 app.Run();
