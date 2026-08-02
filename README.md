@@ -2,10 +2,14 @@
 
 A full-stack personal finance management app. Track income and expenses, organize them by category, and visualize your financial health with a real-time dashboard.
 
+**[Live demo](https://finance-tracker-web-theta.vercel.app)** · **[API / Swagger](https://finance-tracker-api-4ny8.onrender.com/swagger)**
+
+> The backend runs on Render's free tier, which spins down after 15 minutes of inactivity — the first request after a while may take 30-50s to wake up. Everything after that is fast.
+
 ![.NET 8](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&logoColor=white)
 ![Nuxt 4](https://img.shields.io/badge/Nuxt-4-00DC82?logo=nuxtdotjs&logoColor=white)
 ![Vue 3](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?logo=microsoftsqlserver&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 
 ## Features
@@ -35,14 +39,15 @@ A full-stack personal finance management app. Track income and expenses, organiz
 |---|---|
 | Frontend | Nuxt 4, Vue 3, Pinia, Tailwind CSS v4, shadcn-vue, Chart.js |
 | Backend | .NET 8 Web API, Entity Framework Core, FluentValidation, Serilog, Swashbuckle |
-| Database | SQL Server |
+| Database | PostgreSQL |
 | Auth | JWT bearer tokens + httpOnly refresh cookie (BFF pattern) |
 | Testing | xUnit, Moq |
+| Deployment | Vercel (frontend), Render (backend + PostgreSQL, Docker) |
 
 ## Architecture
 
 ```
-Browser  <--HTTP-->  Nuxt 4 (SSR + BFF)  <--HTTP-->  .NET 8 Web API  <--EF Core-->  SQL Server
+Browser  <--HTTP-->  Nuxt 4 (SSR + BFF)  <--HTTP-->  .NET 8 Web API  <--EF Core-->  PostgreSQL
 ```
 
 - The **access token** lives only in memory (Pinia store) on the client — never persisted to `localStorage` or a cookie readable by JavaScript.
@@ -82,7 +87,7 @@ finance-tracker/
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [Node.js 18+](https://nodejs.org/)
-- SQL Server (LocalDB is enough for local development)
+- [PostgreSQL](https://www.postgresql.org/download/) (or Docker, see below)
 
 ### 1. Clone the repository
 
@@ -93,6 +98,14 @@ cd finance-tracker
 
 ### 2. Backend setup
 
+If you don't have PostgreSQL installed locally, the quickest option is Docker:
+
+```bash
+docker run --name finance-tracker-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=finance_tracker -p 5432:5432 -d postgres
+```
+
+Then run the API:
+
 ```bash
 cd FinanceTracker.Api
 dotnet restore
@@ -100,7 +113,7 @@ dotnet restore
 # Install the EF Core CLI tool if you don't already have it
 dotnet tool install --global dotnet-ef
 
-# Create the database and apply migrations (uses LocalDB by default)
+# Create the database schema and seed default categories
 dotnet ef database update
 
 dotnet run
@@ -108,7 +121,7 @@ dotnet run
 
 The API starts at `http://localhost:5299`. Swagger UI is available at `http://localhost:5299/swagger`.
 
-By default it connects to `(localdb)\mssqllocaldb`. To use a different SQL Server instance, edit `ConnectionStrings:DefaultConnection` in `FinanceTracker.Api/appsettings.json`.
+The default connection string in `appsettings.json` (`Host=localhost;Port=5432;Database=finance_tracker;Username=postgres;Password=postgres`) matches the Docker command above. Edit `ConnectionStrings:DefaultConnection` if you're using a different setup.
 
 > **Note:** the `Jwt:Secret` in `appsettings.json` is a placeholder. Replace it with a real secret (via [user secrets](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets) or an environment variable) before deploying anywhere outside your machine.
 
@@ -158,8 +171,12 @@ Base URL: `/api/v1`
 
 Full interactive documentation is available via Swagger once the API is running.
 
+## Deployment
+
+- **Frontend** is deployed to [Vercel](https://vercel.com), which builds and serves the Nuxt app (SSR + the BFF auth routes) directly from this repo.
+- **Backend + database** are deployed to [Render](https://render.com) using the [`render.yaml`](./render.yaml) Blueprint in this repo, which provisions a Docker web service (built from [`FinanceTracker.Api/Dockerfile`](./FinanceTracker.Api/Dockerfile)) and a free PostgreSQL instance, and wires the connection string between them automatically.
+
 ## Roadmap
 
-- [ ] Deploy frontend to Vercel and backend + database to Railway
 - [ ] Recurring transactions
 - [ ] Budget goals per category
