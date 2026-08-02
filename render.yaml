@@ -1,0 +1,30 @@
+databases:
+  - name: finance-tracker-db
+    plan: free
+    databaseName: finance_tracker
+    user: finance_tracker
+
+services:
+  - type: web
+    name: finance-tracker-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./FinanceTracker.Api/Dockerfile
+    dockerContext: ./FinanceTracker.Api
+    envVars:
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: finance-tracker-db
+          property: connectionString
+      - key: Jwt__Secret
+        generateValue: true
+      - key: Jwt__Issuer
+        value: FinanceTracker.Api
+      - key: Jwt__Audience
+        value: FinanceTracker.Client
+      - key: Jwt__AccessTokenExpirationMinutes
+        value: 15
+      - key: Jwt__RefreshTokenExpirationDays
+        value: 7
+      - key: Cors__AllowedOrigins__0
+        value: http://localhost:3000
